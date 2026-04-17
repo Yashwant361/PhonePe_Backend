@@ -62,32 +62,33 @@ A simple, easy-to-understand Backend for a PhonePe clone project. This system is
 ```bash
 npm install
 2. Configure Environment Variables
-
-Create a .env file in root:
+Inside your root folder, please ensure you have an .env file containing this strict outline:
 
 PORT=5000
 MONGODB_URI=mongodb://127.0.0.1:27017/phonepe-clone
 JWT_SECRET=super_secret_key_change_in_production
+(If you're deploying this or using Mongo Atlas, swap out mongodb://127.0.0.1:27017/phonepe-clone with your cloud URI connection string)
 3. Generate Swagger Document
+Refresh the static UI configurations mapping to your local ports by executing:
+
 npm run swagger
+
 4. Seed Dummy Data (Highly Recommended)
 npm run seed
 Seeded Users
 amit@example.com
 
-Phone: 9876543210 | UPI: amit123@phonepe | Balance: 5000
-priya@example.com
+What gets seeded?
 
-Phone: 9876543211 | UPI: priya456@phonepe | Balance: 3000
-rahul@example.com
+amit@example.com (Phone: 9876543210 | UPI: amit123@phonepe | Bal: 5000)
+priya@example.com (Phone: 9876543211 | UPI: priya456@phonepe | Bal: 3000)
+rahul@example.com (Phone: 9876543212 | UPI: rahul789@phonepe | Bal: 1500)
+neha@example.com (Phone: 9876543213 | UPI: neha012@phonepe | Bal: 8000)
+Global Credentials For these seeded accounts:
 
-Phone: 9876543212 | UPI: rahul789@phonepe | Balance: 1500
-neha@example.com
-
-Phone: 9876543213 | UPI: neha012@phonepe | Balance: 8000
-Global Credentials
 Password: password123
 MPIN: 1234
+
 5. Run the Server
 
 Production
