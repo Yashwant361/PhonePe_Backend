@@ -103,4 +103,4 @@ Easily check what headers and schemas the models expect via your localhost URL:
 4. Supply the provided file: `postman_collection.json`.
 5. Open the **1. Authentication** folder and fire the **Login User** template.
 6. Look closely at Postman's "Tests" Scripting block. It catches your active Login and invisibly injects the secret `Token` string back into the local environment setup named `{{token}}`. 
-7. **Because of this logic**, you do not ever need to copy/paste Bearer configurations! You can immediately fire Top-ups, Money Requests, and Bill Pays. Let Postman handle the permissions for you out of the box!
+7. **Because of this logic**, you do not ever need to copy/paste Bearer configurations! You can immediately fire Top-ups, Money Requests, and Bill Pays. Let Postman handle the permissions for you out of the box
