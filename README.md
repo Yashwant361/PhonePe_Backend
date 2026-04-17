@@ -4,7 +4,7 @@ A simple, easy-to-understand Backend for a PhonePe clone project. This system is
 
 ## 🌟 Full Feature Set
 1. **User Authentication:** Strict JWT-based Register and Login system.
-2. **Dynamic UPI IDs:** Newly registered users automatically receive a unique UPI tag (e.g., `saurabh354@phonepe`).
+2. **Dynamic UPI IDs:** Newly registered users automatically receive a unique UPI tag (e.g., `yash354@phonepe`).
 3. **Strict MPIN System:** All outbound transactions mathematically enforce a robust 4-digit MPIN verification layer. 
 4. **Flexible Peer-to-Peer Transfers:** Send money directly to users by entering either their **10-digit Phone Number** OR their assigned **UPI ID**.
 5. **Wallet Top-Up:** Simulate direct bank transfers by adding test deposits into a user's wallet via the Top-up route.
