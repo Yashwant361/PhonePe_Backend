@@ -143,4 +143,4 @@ module.exports = {
     loginUser,
     setupMpin,
     getUserProfile
-};
+};  

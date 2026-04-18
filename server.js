@@ -5,6 +5,7 @@ const cors = require('cors');
 const connectDB = require('./src/config/db');
 const SwaggerUi = require('swagger-ui-express')
 const authRoutes = require('./src/routes/authRoutes');
+const transactionRoutes = require('./src/routes/transactionRoutes');
 
 let swaggerDocument = {};
 try {
@@ -31,6 +32,7 @@ app.get('/', (req, res) => {
 
 //middleware --> routes
 app.use('/api/auth', authRoutes)
+app.use('/api/transaction', transactionRoutes);
 
 
 
