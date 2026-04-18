@@ -1,3 +1,5 @@
+
+
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -7,7 +9,7 @@ require('dotenv').config();
 const generateToken = (id) => {
     return jwt.sign(
         { id },
-        process.env.JWT_SECERT,
+        process.env.JWT_SECRET,
         { expiresIn: "7d" }
     );
 };
@@ -71,10 +73,15 @@ const loginUser = async (req, res) => {
     try {
         const { email, phone, password } = req.body;
 
-        if (!email || !phone || !password) {
-            return res.status(400).json({ message: 'Please enter all details' })
+        if ((!email && !phone) || !password) {
+            return res.status(400).json({
+                message: "Enter email or phone with password"
+            });
         }
-        const user = await User.findOne({ $or: [{ email }, { phone }] });
+
+        const user = await User.findOne({
+            $or: [{ email }, { phone }]
+        });
 
         if (user && (await bcrypt.compare(password, user.password))) {
             res.json({
@@ -95,12 +102,45 @@ const loginUser = async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 }
-const setupMin = async (req, res) => { }
-const getUserProfile = async (req, res) => { }
+const setupMpin = async (req, res) => {
+    try {
+        const { mpin } = req.body;
+        if (!mpin || mpin.length !== 4) {
+            return res.status(400).json({ message: 'Please provide a valid 4-digit MPIN' })
+        }
+        const salt = await bcrypt.genSalt(10);
+        const hashedMpin = await bcrypt.hash(mpin, salt);
+
+        const user = await User.findByIdAndUpdate(
+            req.user._id,
+            { mpin: hashedMpin },
+            { new: true })
+        if (user) {
+            res.json({ message: 'MPIN set Succesfully' });
+        } else {
+            res.status(400).json({ message: 'Failed to set MPIN' })
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+const getUserProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).select('-password -mpin');
+        if (user) {
+            res.json(user);
+        } else {
+            res.status(404).json({ message: 'User not found' })
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 
 module.exports = {
     registerUser,
     loginUser,
-    setupMin,
+    setupMpin,
     getUserProfile
 };

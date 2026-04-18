@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { registerUser,
     loginUser,
-    setupMin,
+    setupMpin,
     getUserProfile
 } = require('../controllers/authController');
 
@@ -17,8 +17,8 @@ router.get('/', (req, res) => {
 //register route
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.post('/set-mpin', protect, setupMin);
-router.post('/profile', protect, getUserProfile);
+router.post('/set-mpin', protect, setupMpin);
+router.get('/profile', protect, getUserProfile);
 
 
 module.exports = router
