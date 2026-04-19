@@ -33,7 +33,7 @@ const sendMoney = async (req, res) => {
             return res.status(401).json({ message: 'Invalid MPIN' })
         }
 
-        const receiver = await user.findOne({ phone });
+        const receiver = await User.findOne({ phone });
         if (!receiver) {
             return res.status(404).json({ message: 'Receiver not found' })
         }
@@ -47,7 +47,7 @@ const sendMoney = async (req, res) => {
 
         //check insufficient balance
         if (sender.balance < amount) {
-            return res.json(400).json({
+            return res.status(400).json({
                 message: 'Insufficient balance'
             });
         }
@@ -81,7 +81,25 @@ const sendMoney = async (req, res) => {
 
 
 const getTransactionHistory = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const transaction = await Transaction.find({
+            $or: [
+                { sender: userId },
+                { receiver: userId }
+            ]
+        })
+            //populate() in Mongoose is a method that automatically replaces referenced ObjectId fields in a document with the actual documents from other collections
+            .populate('sender', 'name email phone')
+            .populate('receiver', 'name email phone')
+            .sort({ createdAt: -1 });
 
+        res.json(transaction);
+
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+
+    }
 
 }
 
