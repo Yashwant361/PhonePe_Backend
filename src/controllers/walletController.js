@@ -27,7 +27,7 @@ const addMoney = async (res, req) => {
             sender: user._id,
             receiver: user._id,
             amount,
-            types: 'ADD_MONEY_WALLET',
+            types: 'ADD_MONEY',
             status: 'COMPLETED'
         });
         res.json({ message: 'Money added Successfully', transaction });
