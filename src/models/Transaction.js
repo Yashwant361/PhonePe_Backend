@@ -14,7 +14,7 @@ const transactionSchema = new mongoose.Schema(
 
         type: {
             type: String,
-            enum: ['TRANSFER', 'ADD_MONEY', 'WITHDRAW', 'BILL_PAY'],
+            enum: ['TRANSFER', 'ADD_MONEY_WALLET', 'WITHDRAW', 'BILL_PAY'],
             default: 'TRANSFER',
         },
         billerName: {

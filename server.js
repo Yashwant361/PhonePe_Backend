@@ -6,6 +6,7 @@ const connectDB = require('./src/config/db');
 const SwaggerUi = require('swagger-ui-express')
 const authRoutes = require('./src/routes/authRoutes');
 const transactionRoutes = require('./src/routes/transactionRoutes');
+const walletRoutes = require('./src/routes/walletRoutes');
 
 let swaggerDocument = {};
 try {
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 //middleware --> routes
 app.use('/api/auth', authRoutes)
 app.use('/api/transaction', transactionRoutes);
+app.use('/api/wallet', walletRoutes);
 
 
 
